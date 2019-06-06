@@ -1,0 +1,47 @@
+{
+  "name": "app-todo-list",
+  "version": "1.0.0",
+  "description": "Todo list aplication for study",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AMarcosCastelo/app-todo-list.git"
+  },
+  "keywords": [],
+  "author": "Antonio Marcos Castelo de Carvalho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AMarcosCastelo/app-todo-list/issues"
+  },
+  "homepage": "https://github.com/AMarcosCastelo/app-todo-list#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "autoprefixer": "^9.6.0",
+    "babel-loader": "^8.0.6",
+    "bootstrap": "^4.3.1",
+    "css-loader": "^2.1.1",
+    "font-awesome": "^4.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.5.1"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "font-awesome-loader": "^1.0.2",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "uglifyjs-webpack-plugin": "^2.1.3"
+  }
+}
