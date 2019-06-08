@@ -1,0 +1,49 @@
+.today-content {
+    padding: 40px;
+    background-color: #282828;
+}
+.today-header {
+    a {
+        margin-right: 20px;
+        text-decoration: none;
+    }
+    span {
+        font-size: 1rem;
+    }
+}
+.btnTodayPlus {
+    background-color: transparent;
+    border-radius: 5px;
+    color: gray;
+    &:hover {
+        background-color: gray;
+        color: #fff;
+    }
+}
+.today-body {
+    padding: 20px;
+}
+.fa-ghost {
+    font-size: 7rem;
+    margin-bottom: 20px;
+}
+td {
+    svg {
+        cursor: pointer;
+        color: gray;
+        border-radius: 50%;
+        &.fa-circle:hover {
+            color: green;
+            background-color: green;
+        }
+        &.fa-trash-alt:hover {
+            color: red;
+        }
+        &.fa-edit:hover {
+            color: #fff;
+        }
+    }
+    &.compact {
+        width: 20px;
+    }
+}
