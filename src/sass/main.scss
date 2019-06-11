@@ -21,7 +21,6 @@ body {
         margin-right: 5px;
     }
 }
-
 .nav {
     li{
         margin-bottom: 5px;
@@ -32,7 +31,23 @@ body {
         }
     }
 }
-
 .navbar-brand {
     font-size: 2rem;
+}
+.task-content {
+    padding: 40px;
+    background-color: #282828;
+}
+.btnTaskPlus {
+    background-color: transparent;
+    border-radius: 5px;
+    color: gray;
+    border: none;
+    &:hover {
+        background-color: gray;
+        color: #fff;
+    }
+}
+#form-1 {
+    width: 100%;
 }

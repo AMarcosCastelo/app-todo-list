@@ -1,5 +1,6 @@
 import {Todo} from '../model/todoTask';
 import {todayContent} from '../components/todayContent';
+import {nextDaysContent} from '../components/nextDaysContent';
 import {Utils} from '../components/Utils/Utils';
 
 // CONTROLLER
@@ -9,7 +10,7 @@ class TodoController {
     constructor() {
 
         this.colRight = document.querySelector('.content-right');
-        this.initEventsButtons('.navBtn');
+        this.initEventsButtons('.navBtn', 'click'); //Add eventos aos botões do menu do lado esquerdo
 
     }
 
@@ -17,15 +18,27 @@ class TodoController {
         switch(textBtn) {
             case 'today': {
                 todayContent(this.colRight, Utils.dateFormat(new Date()));
-                document.querySelector('.btnTodayPlus').addEventListener('click', e =>{
-                    this.addFormTask('.today-body');
+                document.querySelector('.btnTaskPlus').addEventListener('click', e =>{
+                    this.addFormTask('.taskTodayBody', '1');
                 });
                 break;
             }
 
             case 'nextDays': {
 
-                console.log('nextDays');
+                nextDaysContent(this.colRight, Utils.dateFormat(new Date()));
+                let btns = document.querySelectorAll('.btnTaskPlus');
+                btns.forEach((btn, i) => {
+                    
+                    this.addEventListenerAll(btn, 'click', e =>{
+                        
+                        let id = btn.id.replace('day', '');
+
+                        this.addFormTask(`.form-${id}`, id);
+
+                    });
+
+                });
                 break;
 
             }
@@ -39,26 +52,28 @@ class TodoController {
         }
     }
 
-    addFormTask(el) {
+    addFormTask(el, id) {
 
         let element = document.querySelector(el);
 
         element.innerHTML = 
         `
-            <form class="form" style="width: 100%">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="task" id="addTask" placeholder="Add Task" required>
-                </div>
-                <button type="submit" class="btn btn-success mr-2" id="btn-add">Add Task</button>
-                <button class="btn btn-secondary border-0" id="btn-cancel">Cancel</button>
-            </form>
+            <div id="form-${id}">
+                <form class="form" style="width: 100%">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="task" id="addTask" placeholder="Add Task" required>
+                    </div>
+                    <button type="submit" class="btn btn-success mr-2" id="btn-add${id}">Add Task</button>
+                    <button class="btn btn-secondary border-0" id="btn-cancel${id}">Cancel</button>
+                </form>
+            </div>
         `;
 
-        this.initEventsButtons('.btn');
+        this.initEventsButtons('.btn', 'click', id); //Add eventos aos botões do formulário
 
     }
 
-    initEventsButtons(class1, event='click') {
+    initEventsButtons(class1, event='click', _id=null) { //Add eventos aos botões 
 
         let buttons = document.querySelectorAll(class1);
         
@@ -68,18 +83,19 @@ class TodoController {
 
                 let textBtn = btn.id.replace('btn-', '');
 
+                e.preventDefault();
+
                 if(textBtn == 'today' || textBtn == 'nextDays' || textBtn == 'projects') {
 
                     this.execBtn(textBtn);
 
-                } else if(textBtn == 'add') {
+                } else if(textBtn == `add${_id}`) {
 
-                    e.preventDefault();
-                    this.addTaskTr('.tableToday');
+                    this.addTaskTr(`.task-body${_id}`);
 
-                } else if( textBtn == 'cancel') {
+                } else if( textBtn == `cancel${_id}`) {
 
-                    this.removeElement('.form')
+                    this.removeElement(`#form-${_id}`);
 
                 }
 
@@ -110,7 +126,6 @@ class TodoController {
     addTaskTr(element) {
 
         let el = document.querySelector(element);
-
         let tr = document.createElement('tr');
 
         tr.innerHTML = 
