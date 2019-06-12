@@ -48,6 +48,16 @@ body {
         color: #fff;
     }
 }
+.btnTaskPlusPro {
+    background-color: transparent;
+    border-radius: 5px;
+    color: gray;
+    border: none;
+    &:hover {
+        background-color: gray;
+        color: #fff;
+    }
+}
 #form-1 {
     width: 100%;
 }
