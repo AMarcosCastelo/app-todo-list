@@ -5,9 +5,13 @@ const projects = (element1) => {
 
     element.innerHTML = 
     `
-        <div class="border-top">
+        <div class="border-top mb-5">
             <div class="project-status my-3">
                 <p>You have no projects</p>
+            </div>
+            <div class="list-projects mt-3">
+                <ul class="news-projects list-unstyled">
+                </ul>
             </div>
             <div class="form-projects mt-4">
             </div>

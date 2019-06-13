@@ -1,0 +1,14 @@
+.news-projects {
+    li {
+        padding: 8px;
+        border-radius: 3px;
+        margin-bottom: 4px;
+        cursor: pointer;
+        &:hover {
+            background-color: gray;
+        }
+        .fa-circle {
+            font-size: 10px;
+        }
+    }
+}

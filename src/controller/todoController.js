@@ -2,6 +2,7 @@ import {Todo} from '../model/todoTask';
 import {todayContent} from '../components/todayContent';
 import {nextDaysContent} from '../components/nextDaysContent';
 import {projects} from '../components/projects';
+import {addFormTask, addFormProject} from '../components/addForms';
 import {Utils} from '../components/Utils/Utils';
 
 // CONTROLLER
@@ -21,7 +22,8 @@ class TodoController {
             case 'today': {
                 todayContent(this.colRight, Utils.dateFormat(new Date()));
                 document.querySelector('.btnTaskPlus').addEventListener('click', e =>{
-                    this.addFormTask('.taskTodayBody', '1');
+                    addFormTask('.taskTodayBody', '1');
+                    this.initEventsButtons('.btn', 'click', '1');
                 });
                 break;
             }
@@ -35,8 +37,8 @@ class TodoController {
                     this.addEventListenerAll(btn, 'click', e =>{
                         
                         let id = btn.id.replace('day', '');
-
-                        this.addFormTask(`.form-${id}`, id);
+                        addFormTask(`.form-${id}`, id);
+                        this.initEventsButtons('.btn', 'click', id);
 
                     });
 
@@ -49,56 +51,16 @@ class TodoController {
 
                 projects(this.menuProjects);
                 document.querySelector('.btnTaskPlusPro').addEventListener('click', e => {
-                    this.addFormProject('.form-projects' , '2');
+                    addFormProject('.form-projects' , 'New');
+                    this.initEventsButtons('.btn', 'click', 'New');
                 });
                 break;       
 
             }
+
         }
     }
-
-    addFormTask(el, id) {
-
-        let element = document.querySelector(el);
-
-        element.innerHTML = 
-        `
-            <div id="form-${id}">
-                <form class="form" style="width: 100%">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="task" id="addTask" placeholder="Add Task" required>
-                    </div>
-                    <button type="submit" class="btn btn-success mr-2" id="btn-add${id}">Add Task</button>
-                    <button class="btn btn-secondary border-0" id="btn-cancel${id}">Cancel</button>
-                </form>
-            </div>
-        `;
-
-        this.initEventsButtons('.btn', 'click', id); //Add eventos aos botões do formulário
-
-    }
-
-    addFormProject(el, id) {
-
-        let element = document.querySelector(el);
-
-        element.innerHTML = 
-        `
-            <div id="form-${id}">
-                <form class="form" style="width: 100%">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="project" id="addProject" placeholder="Add Project" required>
-                    </div>
-                    <button type="submit" class="btn btn-success mr-2" id="btn-add${id}">Add Project</button>
-                    <button class="btn btn-secondary border-0" id="btn-cancel${id}">Cancel</button>
-                </form>
-            </div>
-        `;
-
-        this.initEventsButtons('.btn', 'click', id); //Add eventos aos botões do formulário
-
-    }
-
+    
     initEventsButtons(class1, event='click', _id=null) { //Add eventos aos botões 
 
         let buttons = document.querySelectorAll(class1);
@@ -114,6 +76,10 @@ class TodoController {
                 if(textBtn == 'today' || textBtn == 'nextDays' || textBtn == 'projects') {
 
                     this.execBtn(textBtn);
+
+                } else if(textBtn == 'addNew'){   
+                    
+                    this.addProjectLi('.news-projects');
 
                 } else if(textBtn == `add${_id}`) {
 
@@ -164,6 +130,21 @@ class TodoController {
 
         el.appendChild(tr);
         this.addEventsTaskTr(tr);
+
+    }
+
+    addProjectLi(element) {
+
+        let el = document.querySelector(element);
+        let li = document.createElement('li');
+
+        li.innerHTML =
+        `
+            <i class="fas fa-circle mr-2"></i>
+            <span>Name of project<span>
+        `;
+
+        el.appendChild(li);
 
     }
 
