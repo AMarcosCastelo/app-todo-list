@@ -1,7 +1,7 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap");
 
 $body-bg: #1f1f1f;
 $body-color: #111;
@@ -9,55 +9,61 @@ $body-color: #111;
 @import "~bootstrap/scss/bootstrap";
 
 body {
-    font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 
 .nav-item {
-    padding: 10px;
-    a {
-        text-decoration: none;
-    }
-    svg {
-        margin-right: 5px;
-    }
+  padding: 10px;
+  a {
+    text-decoration: none;
+  }
+  svg {
+    margin-right: 5px;
+  }
 }
 .nav {
-    li{
-        margin-bottom: 5px;
-        border-radius: 4px;
-        &:hover {
-            background-color: gray;
-            cursor: pointer;
-        }
+  li {
+    margin-bottom: 5px;
+    border-radius: 4px;
+    &:hover {
+      background-color: gray;
+      cursor: pointer;
     }
+  }
 }
 .navbar-brand {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 .task-content {
-    padding: 40px;
-    background-color: #282828;
+  padding: 40px;
+  background-color: #282828;
 }
 .btnTaskPlus {
-    background-color: transparent;
-    border-radius: 5px;
-    color: gray;
-    border: none;
-    &:hover {
-        background-color: gray;
-        color: #fff;
-    }
+  background-color: transparent;
+  border-radius: 5px;
+  color: gray;
+  border: none;
+  &:hover {
+    background-color: gray;
+    color: #fff;
+  }
 }
 .btnTaskPlusPro {
-    background-color: transparent;
-    border-radius: 5px;
-    color: gray;
-    border: none;
-    &:hover {
-        background-color: gray;
-        color: #fff;
-    }
+  background-color: transparent;
+  border-radius: 5px;
+  color: gray;
+  border: none;
+  &:hover {
+    background-color: gray;
+    color: #fff;
+  }
+}
+.fa-font-awesome-flag {
+  font-size: 2rem;
+}
+.flag-tr {
+  font-size: 1.2rem;
 }
 #form-1 {
-    width: 100%;
+  width: 100%;
 }

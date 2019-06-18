@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="author" content="Antonio Marcos Castelo de Carvalho">
     <meta name="description" content="Todo List for study of webpack.">
-    <meta name="keywords" content="HTML5, CSS3, JS, WEBPACK"> 
+    <meta name="keywords" content="HTML5, CSS3, JS, WEBPACK">
     <title>Todo List</title>
 </head>
 <body>
@@ -20,31 +20,33 @@
                 <aside class="main-sidebar text-white col-md-3 mt-3">
                     <h5>MENU</h5>
                     <ul class="nav flex-column">
-                        <li class="nav-item navBtn" id="btn-today">
+                        <li class="nav-item navBtn d-flex justify-content-between" id="btn-today">
                             <a href="#" class="text-white">
                                 <i class="fas fa-calendar-day"></i>
-                                <span>Today</span> 
+                                <span>Today</span>
                             </a>
+                            <span class="quantityTask"></span>
                         </li>
-                        <li class="nav-item navBtn" id="btn-nextDays">
+                        <li class="nav-item navBtn d-flex justify-content-between" id="btn-nextDays">
                             <a href="#" class="text-white">
                                 <i class="fas fa-calendar-alt"></i>
-                                <span>Next 7 days</span> 
+                                <span>Next 7 days</span>
                             </a>
+                            <span class="quantityTask">0</span>
                         </li>
                         <li class="nav-item navBtn" id="btn-projects">
                             <a href="#" class="text-white">
                                 <i class="fas fa-plus"></i>
-                                <span>Projects</span> 
+                                <span>Projects</span>
                             </a>
                         </li>
-                    </ul>   
+                    </ul>
                     <div class="projects-content">
 
                     </div>
                 </aside>
                 <section class="content-right col-md-9">
-                    
+
                 </section>
             </div>
         </div>

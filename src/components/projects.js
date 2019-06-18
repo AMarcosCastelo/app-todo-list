@@ -1,11 +1,8 @@
-
 const projects = (element1) => {
+  const element = element1;
 
-    let element = element1;
-
-    element.innerHTML = 
-    `
-        <div class="border-top mb-5">
+  element.innerHTML = `
+        <div class="border-top projects-div mb-5">
             <div class="project-status my-3">
                 <p>You have no projects</p>
             </div>
@@ -23,7 +20,6 @@ const projects = (element1) => {
             </div>
         </div>
     `;
+};
 
-}
-
-export {projects}
+export { projects };

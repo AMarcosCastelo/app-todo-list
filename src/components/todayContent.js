@@ -1,10 +1,7 @@
-
 const todayContent = (element1, date) => {
+  const todayEl = element1;
 
-    let  todayEl = element1;
-
-   todayEl.innerHTML = 
-   `
+  todayEl.innerHTML = `
         <div class="task-content text-white">
             <div class="today-header mb-3 d-flex justify-content-between align-items-center">
                 <h2 class="d-flex">
@@ -24,14 +21,9 @@ const todayContent = (element1, date) => {
                 <table>
             </div>
             <div class="taskTodayBody d-flex justify-content-center">
-                <div class="ghost d-flex flex-column align-items-center">
-                    <i class="fas fa-ghost"></i>
-                    <h1>Add new Task</h1>
-                </div>
             </div>
         </div>
    `;
-
 };
 
-export {todayContent};
+export { todayContent };
