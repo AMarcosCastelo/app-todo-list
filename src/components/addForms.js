@@ -38,11 +38,11 @@ const addFormTask = (el, id) => {
     `;
 };
 
-const editTask = (el, id) => {
+const editTask = (el, date) => {
   const element = document.querySelector(el);
 
   element.innerHTML = `
-        <div id="form-${id}">
+        <div id="form-${date}">
             <form class="form-task-update" style="width: 100%">
                 <div class="form-group">
                     <input type="text" class="form-control" name="name" id="updateTask" required>
@@ -70,8 +70,8 @@ const editTask = (el, id) => {
                   </div>
 
                   <div>
-                      <button type="submit" class="btn btn-primary mr-2" id="btn-edit${id}">Salvar</button>
-                      <button type="button" class="btn btn-secondary border-0" id="btn-cancel${id}">Cancel</button>
+                      <button type="submit" class="btn btn-primary mr-2" id="btn-edit${date}">Salvar</button>
+                      <button type="button" class="btn btn-secondary border-0" id="btn-cancel${date}">Cancel</button>
                   </div>
                 </div>
             </form>

@@ -24,10 +24,12 @@ class TodoController {
     switch (textBtn) {
       case 'today': {
         todayContent(this.colRight, Utils.dateFormat(new Date()));
-        this.selectAll(); // Carrega os dados em localStorage
-        document.querySelector('.btnTaskPlus').addEventListener('click', () => {
+        const btn = document.querySelector('.btnTaskPlus');
+        const { date } = btn.dataset;
+        this.selectAll(date); // Carrega os dados em localStorage
+        btn.addEventListener('click', () => {
           addFormTask('.taskTodayBody', '1');
-          this.initEventsButtons('.btn', 'click', '1');
+          this.initEventsButtons('.btn', 'click', '1', date);
         });
         break;
       }
@@ -35,11 +37,13 @@ class TodoController {
       case 'nextDays': {
         nextDaysContent(this.colRight, Utils.dateFormat(new Date()));
         const btns = document.querySelectorAll('.btnTaskPlus');
+        this.selectAll();
         btns.forEach((btn) => {
           this.addEventListenerAll(btn, 'click', () => {
             const id = btn.id.replace('day', '');
+            const { date } = btn.dataset;
             addFormTask(`.form-${id}`, id);
-            this.initEventsButtons('.btn', 'click', id);
+            this.initEventsButtons('.btn', 'click', id, date);
           });
         });
         break;
@@ -59,7 +63,7 @@ class TodoController {
     }
   } // Fim do execBtn
 
-  getValuesForm(formEl, _id) {
+  getValuesForm(formEl, _id, date) {
     const data = {};
     let isValid = true;
 
@@ -85,7 +89,7 @@ class TodoController {
     return new Task(data.name, data.priority, data.id);
   }
 
-  initEventsButtons(class1, event = 'click', id = null, form) {
+  initEventsButtons(class1, event = 'click', id = null, date) {
     // Add eventos aos botões
 
     const buttons = document.querySelectorAll(class1);
@@ -104,13 +108,13 @@ class TodoController {
             this.addProjectLi('.news-projects');
             break;
           case `add${id}`:
-            this.onSubmit('.form-task', id);
+            this.onSubmit('.form-task', id, date);
             break;
           case `cancel${id}`:
             this.removeElement(`#form-${id}`);
             break;
           case `edit${id}`:
-            this.onEdit('.form-task-update', `.task-body${id}`, id);
+            this.onEdit('.form-task-update', `.task-body[data-date="${date}"]`, id, date);
             break;
           default:
         }
@@ -130,22 +134,37 @@ class TodoController {
     });
   }
 
-  selectAll() {
-    const tasksToday = Task.getTaskStorage();
-    tasksToday.forEach((dataTask) => {
-      const task = new Task();
-      task.loadFromJSON(dataTask);
-      // carrega os dados a partir de um JSON
-      this.addTaskTr('.task-body1', task, 1);
-    });
+  selectAll(date = null) {
+    if (date) {
+      const tasksToday = Task.getTaskStorage(date);
+      tasksToday.forEach((dataTask) => {
+        const task = new Task();
+        task.loadFromJSON(dataTask);
+        // carrega os dados a partir de um JSON
+        this.addTaskTr(`.task-body[data-date="${date}"]`, task, 1, date);
+      });
+    } else {
+      const tasksNewsDays = Task.getTaskStorage();
+      tasksNewsDays.forEach((arrayTask) => {
+        arrayTask.forEach((tasks) => {
+          const task = new Task();
+          task.loadFromJSON(tasks);
+          const date1 = task.register;
+          this.addTaskTr(`.task-body[data-date="${date1}"]`, task, 1, date1);
+        });
+
+        // this.addTaskTr(`.task-body[data-date="${date1}"]`, task, 1, date1);
+      });
+    }
   }
 
-  addTaskTr(element, dataTask, id) {
+  addTaskTr(element, dataTask, id, date) {
     const el = document.querySelector(element);
     const tr = this.getTr(dataTask, id, el);
     tr.dataset.task = JSON.stringify(dataTask);
 
     el.appendChild(tr);
+    // this.updateCount(date);
     this.updateCount();
   }
 
@@ -178,8 +197,20 @@ class TodoController {
   }
 
   updateCount() {
-    const tasks = Task.getTaskStorage();
-    document.querySelector('.quantityTask').innerHTML = tasks.length;
+    const date = Utils.dateFormat(new Date());
+    const tasksDate = Task.getTaskStorage(date);
+    const tasksNoDate = Task.getTaskStorage();
+    let countToday = 0;
+    let count = 0;
+
+    if (date) {
+      countToday += tasksDate.length;
+    }
+    tasksNoDate.forEach((task) => {
+      count += task.length;
+    });
+    document.querySelector('.quantityTaskToday').innerHTML = countToday;
+    document.querySelector('.quantityTaskDays').innerHTML = count;
   }
 
   addProjectLi(element) {
@@ -198,7 +229,7 @@ class TodoController {
     tr.querySelector('.check').addEventListener('click', () => {
       const task = new Task();
       task.loadFromJSON(JSON.parse(tr.dataset.task));
-      task.remove();
+      task.remove(task.register);
       tr.remove();
       this.updateCount();
     });
@@ -208,7 +239,7 @@ class TodoController {
       if (confirm('Deseja realmente excluir?')) {
         const task = new Task();
         task.loadFromJSON(JSON.parse(tr.dataset.task));
-        task.remove();
+        task.remove(task.register);
         tr.remove();
         this.updateCount();
       }
@@ -216,9 +247,8 @@ class TodoController {
 
     tr.querySelector('.edit').addEventListener('click', () => {
       const json = JSON.parse(tr.dataset.task);
-      editTask('.taskTodayBody', 1);
+      editTask(`.form-${id}`, id);
       const form = document.querySelector('.form-task-update');
-
       form.dataset.trIndex = tr.sectionRowIndex;
 
       // eslint-disable-next-line no-restricted-syntax
@@ -242,30 +272,32 @@ class TodoController {
         }
       }
       // Adiciona eventos nos botões do formulário de edição
-      this.initEventsButtons('.btn', 'click', '1');
+      // eslint-disable-next-line no-underscore-dangle
+      this.initEventsButtons('.btn', 'click', '1', json._register);
     });
   }
 
-  onSubmit(formBtn, _id) {
+  onSubmit(formBtn, id, date) {
     const elementForm = document.querySelector(formBtn);
     elementForm.addEventListener('submit', (event) => {
       event.preventDefault();
       const btn = elementForm.querySelector('[type="submit"]');
       btn.disabled = true;
       const values = this.getValuesForm(elementForm);
+      values.register = date;
       if (values) {
-        values.save();
+        values.save(date);
       } else {
         return;
       }
-      this.addTaskTr(`.task-body${_id}`, values, _id);
+      this.addTaskTr(`.task-body[data-date="${date}"]`, values, id, date);
       elementForm.reset();
       btn.disabled = false;
       elementForm.remove();
     });
   }
 
-  onEdit(formBtn, tableEl, _id) {
+  onEdit(formBtn, tableEl, id, date) {
     const elementForm = document.querySelector(formBtn);
     const elementTable = document.querySelector(tableEl);
 
@@ -277,17 +309,19 @@ class TodoController {
       btn.disabled = true;
 
       const values = this.getValuesForm(elementForm);
+      values.register = date;
       const index = elementForm.dataset.trIndex;
       const tr = elementTable.rows[index];
       const taskOld = JSON.parse(tr.dataset.task);
       const result = Object.assign({}, taskOld, values);
       const task = new Task();
       task.loadFromJSON(result);
-      task.save();
-      this.getTr(task, _id, tableEl, tr);
+      task.save(date);
+      this.getTr(task, id, tableEl, tr);
       btn.disabled = false;
       elementForm.remove();
     });
   }
 }
+
 export { TodoController };

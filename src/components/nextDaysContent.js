@@ -15,13 +15,14 @@ const nextDaysContent = (element1) => {
                     <h2 class="m-2">
                         Tomorrow
                     </h2>
-                    <span class="d-flex align-items-center">
+                    <span class="date d-flex align-items-center">
                       ${Utils.dateFormat(new Date(), 1)}
                     </span>
                 </div>
                 <div class="tableContent table-responsive">
                     <table class="table">
-                        <tbody class="task-body2 text-white">
+                        <tbody class="task-body text-white"
+                        data-date="${Utils.dateFormat(new Date(), 1)}">
 
                         </tbody>
                     <table>
@@ -30,7 +31,8 @@ const nextDaysContent = (element1) => {
                     </div>
                 </div>
                 <div class="btn-form">
-                    <button class="btnTaskPlus" id="day2" border-0 p-2">
+                    <button class="btnTaskPlus" data-date="${Utils.dateFormat(new Date(), 1)}"
+                    id="day2" border-0 p-2">
                         <i class="fas fa-plus mr-2"></i>
                         <span>Add Task</span>
                     </button>
@@ -41,13 +43,14 @@ const nextDaysContent = (element1) => {
                     <h2 class="m-2">
                       ${Utils.dayFormat(new Date(), 2)}
                     </h2>
-                    <span class="d-flex align-items-center">
+                    <span class="date d-flex align-items-center">
                       ${Utils.dateFormat(new Date(), 2)}
                     </span>
                 </div>
                 <div class="tableContent table-responsive">
                     <table class="table">
-                        <tbody class="task-body3 text-white">
+                        <tbody class="task-body text-white"
+                        data-date="${Utils.dateFormat(new Date(), 2)}">
 
                         </tbody>
                     <table>
@@ -56,7 +59,8 @@ const nextDaysContent = (element1) => {
                     </div>
                 </div>
                 <div class="btn-form">
-                    <button class="btnTaskPlus" id="day3" border-0 p-2">
+                    <button class="btnTaskPlus" data-date="${Utils.dateFormat(new Date(), 2)}"
+                     id="day3" border-0 p-2">
                         <i class="fas fa-plus mr-2"></i>
                         <span>Add Task</span>
                     </button>
@@ -67,13 +71,14 @@ const nextDaysContent = (element1) => {
                     <h2 class="m-2">
                     ${Utils.dayFormat(new Date(), 3)}
                     </h2>
-                    <span class="d-flex align-items-center">
+                    <span class="date d-flex align-items-center">
                       ${Utils.dateFormat(new Date(), 3)}
                     </span>
                 </div>
                 <div class="tableContent table-responsive">
                     <table class="table">
-                        <tbody class="task-body4 text-white">
+                        <tbody class="task-body text-white"
+                        data-date="${Utils.dateFormat(new Date(), 3)}">
 
                         </tbody>
                     <table>
@@ -82,7 +87,8 @@ const nextDaysContent = (element1) => {
                     </div>
                 </div>
                 <div class="btn-form">
-                    <button class="btnTaskPlus" id="day4" border-0 p-2">
+                    <button class="btnTaskPlus" data-date="${Utils.dateFormat(new Date(), 3)}"
+                    id="day4" border-0 p-2">
                         <i class="fas fa-plus mr-2"></i>
                         <span>Add Task</span>
                     </button>
@@ -93,13 +99,14 @@ const nextDaysContent = (element1) => {
                     <h2 class="m-2">
                       ${Utils.dayFormat(new Date(), 4)}
                     </h2>
-                    <span class="d-flex align-items-center">
+                    <span class="date d-flex align-items-center">
                       ${Utils.dateFormat(new Date(), 4)}
                     </span>
                 </div>
                 <div class="tableContent table-responsive">
                     <table class="table">
-                        <tbody class="task-body5 text-white">
+                        <tbody class="task-body text-white"
+                        data-date="${Utils.dateFormat(new Date(), 4)}">
 
                         </tbody>
                     <table>
@@ -108,7 +115,8 @@ const nextDaysContent = (element1) => {
                     </div>
                 </div>
                 <div class="btn-form">
-                    <button class="btnTaskPlus" id="day5" border-0 p-2">
+                    <button class="btnTaskPlus" data-date="${Utils.dateFormat(new Date(), 4)}"
+                    id="day5" border-0 p-2">
                         <i class="fas fa-plus mr-2"></i>
                         <span>Add Task</span>
                     </button>
@@ -119,13 +127,14 @@ const nextDaysContent = (element1) => {
                     <h2 class="m-2">
                         ${Utils.dayFormat(new Date(), 5)}
                     </h2>
-                    <span class="d-flex align-items-center">
+                    <span class="date d-flex align-items-center">
                       ${Utils.dateFormat(new Date(), 5)}
                     </span>
                 </div>
                 <div class="tableContent table-responsive">
                     <table class="table">
-                        <tbody class="task-body6 text-white">
+                        <tbody class="task-body text-white"
+                        data-date="${Utils.dateFormat(new Date(), 5)}">
 
                         </tbody>
                     <table>
@@ -134,7 +143,8 @@ const nextDaysContent = (element1) => {
                     </div>
                 </div>
                 <div class="btn-form">
-                    <button class="btnTaskPlus" id="day6" border-0 p-2">
+                    <button class="btnTaskPlus" data-date="${Utils.dateFormat(new Date(), 5)}"
+                     id="day6" border-0 p-2">
                         <i class="fas fa-plus mr-2"></i>
                         <span>Add Task</span>
                     </button>
@@ -145,13 +155,14 @@ const nextDaysContent = (element1) => {
                     <h2 class="m-2">
                       ${Utils.dayFormat(new Date(), 6)}
                     </h2>
-                    <span class="d-flex align-items-center">
+                    <span class="date d-flex align-items-center">
                       ${Utils.dateFormat(new Date(), 6)}
                     </span>
                 </div>
                 <div class="tableContent table-responsive">
                     <table class="table">
-                        <tbody class="task-body7 text-white">
+                        <tbody class="task-body text-white"
+                        data-date="${Utils.dateFormat(new Date(), 6)}">
 
                         </tbody>
                     <table>
@@ -160,7 +171,8 @@ const nextDaysContent = (element1) => {
                     </div>
                 </div>
                 <div class="btn-form">
-                    <button class="btnTaskPlus" id="day7" border-0 p-2">
+                    <button class="btnTaskPlus" data-date="${Utils.dateFormat(new Date(), 6)}"
+                     id="day7" border-0 p-2">
                         <i class="fas fa-plus mr-2"></i>
                         <span>Add Task</span>
                     </button>
