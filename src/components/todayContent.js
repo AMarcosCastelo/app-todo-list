@@ -24,7 +24,8 @@ const todayContent = (element1, date) => {
                     </tbody>
                 <table>
             </div>
-            <div class="taskTodayBody d-flex justify-content-center">
+            <div class="form d-flex justify-content-center"
+            data-date="${Utils.dateFormat(new Date())}">
             </div>
         </div>
    `;

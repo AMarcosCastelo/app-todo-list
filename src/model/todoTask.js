@@ -21,15 +21,6 @@ class Task {
     }
   }
 
-  // static getTaskStorage(date) {
-  //   // Pega os dados do localStorage
-  //   let tasksToday = [];
-  //   if (localStorage.getItem(date)) {
-  //     tasksToday = JSON.parse(localStorage.getItem(date));
-  //   }
-  //   return tasksToday;
-  // }
-
   static getTaskStorage(date = null) {
     // Pega os dados do localStorage
     let tasksToday = [];

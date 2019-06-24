@@ -26,7 +26,7 @@ const nextDaysContent = (element1) => {
 
                         </tbody>
                     <table>
-                    <div class="form-2">
+                    <div class="form" data-date="${Utils.dateFormat(new Date(), 1)}">
 
                     </div>
                 </div>
@@ -54,7 +54,7 @@ const nextDaysContent = (element1) => {
 
                         </tbody>
                     <table>
-                    <div class="form-3">
+                    <div class="form" data-date="${Utils.dateFormat(new Date(), 2)}">
 
                     </div>
                 </div>
@@ -82,7 +82,7 @@ const nextDaysContent = (element1) => {
 
                         </tbody>
                     <table>
-                    <div class="form-4">
+                    <div class="form" data-date="${Utils.dateFormat(new Date(), 3)}">
 
                     </div>
                 </div>
@@ -110,7 +110,7 @@ const nextDaysContent = (element1) => {
 
                         </tbody>
                     <table>
-                    <div class="form-5">
+                    <div class="form" data-date="${Utils.dateFormat(new Date(), 4)}">
 
                     </div>
                 </div>
@@ -138,7 +138,7 @@ const nextDaysContent = (element1) => {
 
                         </tbody>
                     <table>
-                    <div class="form-6">
+                    <div class="form" data-date="${Utils.dateFormat(new Date(), 5)}">
 
                     </div>
                 </div>
@@ -166,7 +166,7 @@ const nextDaysContent = (element1) => {
 
                         </tbody>
                     <table>
-                    <div class="form-7">
+                    <div class="form" data-date="${Utils.dateFormat(new Date(), 6)}">
 
                     </div>
                 </div>

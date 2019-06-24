@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 /* eslint-disable guard-for-in */
 /* eslint-disable class-methods-use-this */
@@ -28,7 +29,7 @@ class TodoController {
         const { date } = btn.dataset;
         this.selectAll(date); // Carrega os dados em localStorage
         btn.addEventListener('click', () => {
-          addFormTask('.taskTodayBody', '1');
+          addFormTask(`.form[data-date="${date}"]`, '1');
           this.initEventsButtons('.btn', 'click', '1', date);
         });
         break;
@@ -42,8 +43,9 @@ class TodoController {
           this.addEventListenerAll(btn, 'click', () => {
             const id = btn.id.replace('day', '');
             const { date } = btn.dataset;
-            addFormTask(`.form-${id}`, id);
+            addFormTask(`.form[data-date="${date}"]`, id);
             this.initEventsButtons('.btn', 'click', id, date);
+            console.log(id);
           });
         });
         break;
@@ -134,6 +136,23 @@ class TodoController {
     });
   }
 
+  updateCount() {
+    const date = Utils.dateFormat(new Date());
+    const tasksDate = Task.getTaskStorage(date);
+    const tasksNoDate = Task.getTaskStorage();
+    let countToday = 0;
+    let count = 0;
+
+    if (date) {
+      countToday += tasksDate.length;
+    }
+    tasksNoDate.forEach((task) => {
+      count += task.length;
+    });
+    document.querySelector('.quantityTaskToday').innerHTML = countToday;
+    document.querySelector('.quantityTaskDays').innerHTML = count;
+  }
+
   selectAll(date = null) {
     if (date) {
       const tasksToday = Task.getTaskStorage(date);
@@ -152,19 +171,16 @@ class TodoController {
           const date1 = task.register;
           this.addTaskTr(`.task-body[data-date="${date1}"]`, task, 1, date1);
         });
-
-        // this.addTaskTr(`.task-body[data-date="${date1}"]`, task, 1, date1);
       });
     }
   }
 
   addTaskTr(element, dataTask, id, date) {
     const el = document.querySelector(element);
-    const tr = this.getTr(dataTask, id, el);
+    const tr = this.getTr(dataTask, id);
     tr.dataset.task = JSON.stringify(dataTask);
 
     el.appendChild(tr);
-    // this.updateCount(date);
     this.updateCount();
   }
 
@@ -196,23 +212,6 @@ class TodoController {
     return tr;
   }
 
-  updateCount() {
-    const date = Utils.dateFormat(new Date());
-    const tasksDate = Task.getTaskStorage(date);
-    const tasksNoDate = Task.getTaskStorage();
-    let countToday = 0;
-    let count = 0;
-
-    if (date) {
-      countToday += tasksDate.length;
-    }
-    tasksNoDate.forEach((task) => {
-      count += task.length;
-    });
-    document.querySelector('.quantityTaskToday').innerHTML = countToday;
-    document.querySelector('.quantityTaskDays').innerHTML = count;
-  }
-
   addProjectLi(element) {
     const el = document.querySelector(element);
     const li = document.createElement('li');
@@ -225,7 +224,7 @@ class TodoController {
     el.appendChild(li);
   }
 
-  addEventsTaskTr(tr, id, el) {
+  addEventsTaskTr(tr, id) {
     tr.querySelector('.check').addEventListener('click', () => {
       const task = new Task();
       task.loadFromJSON(JSON.parse(tr.dataset.task));
@@ -247,7 +246,9 @@ class TodoController {
 
     tr.querySelector('.edit').addEventListener('click', () => {
       const json = JSON.parse(tr.dataset.task);
-      editTask(`.form-${id}`, id);
+      const date = json._register;
+      console.log(id);
+      editTask(`.form[data-date="${date}"]`, id);
       const form = document.querySelector('.form-task-update');
       form.dataset.trIndex = tr.sectionRowIndex;
 
@@ -273,7 +274,7 @@ class TodoController {
       }
       // Adiciona eventos nos botões do formulário de edição
       // eslint-disable-next-line no-underscore-dangle
-      this.initEventsButtons('.btn', 'click', '1', json._register);
+      this.initEventsButtons('.btn', 'click', id, json._register);
     });
   }
 
@@ -300,7 +301,6 @@ class TodoController {
   onEdit(formBtn, tableEl, id, date) {
     const elementForm = document.querySelector(formBtn);
     const elementTable = document.querySelector(tableEl);
-
     elementForm.addEventListener('submit', (event) => {
       event.preventDefault();
 
