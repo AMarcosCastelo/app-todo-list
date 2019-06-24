@@ -17,7 +17,9 @@ class TodoController {
     this.menuProjects = document.querySelector('.projects-content');
     this.colRight = document.querySelector('.content-right');
     this.initEventsButtons('.navBtn', 'click'); // Add eventos aos botões do menu do lado esquerdo;
-    this.updateCount();
+    this.updateCount(); // Inicia a contagem em localStorage e cria as notificações
+    Task.removeItemLocalStorage(Utils.dateFormat(new Date(), -1));
+    // Remove qualquer task do localStorage que esteja atrasado
   }
 
   execBtn(textBtn) {
@@ -45,7 +47,6 @@ class TodoController {
             const { date } = btn.dataset;
             addFormTask(`.form[data-date="${date}"]`, id);
             this.initEventsButtons('.btn', 'click', id, date);
-            console.log(id);
           });
         });
         break;
@@ -142,7 +143,6 @@ class TodoController {
     const tasksNoDate = Task.getTaskStorage();
     let countToday = 0;
     let count = 0;
-
     if (date) {
       countToday += tasksDate.length;
     }
@@ -247,7 +247,6 @@ class TodoController {
     tr.querySelector('.edit').addEventListener('click', () => {
       const json = JSON.parse(tr.dataset.task);
       const date = json._register;
-      console.log(id);
       editTask(`.form[data-date="${date}"]`, id);
       const form = document.querySelector('.form-task-update');
       form.dataset.trIndex = tr.sectionRowIndex;

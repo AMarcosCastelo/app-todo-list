@@ -21,6 +21,12 @@ class Task {
     }
   }
 
+  static removeItemLocalStorage(keyDate) {
+    if (localStorage.getItem(keyDate)) {
+      localStorage.removeItem(keyDate);
+    }
+  }
+
   static getTaskStorage(date = null) {
     // Pega os dados do localStorage
     let tasksToday = [];
