@@ -1,4 +1,4 @@
-# PROJECT: APP TODO-LIST (incomplete)
+# PROJECT: APP TODO-LIST (Incomplete 'project' tab)
 
 Hello! I'm Antonio Marcos and this is my App Todo-List from the curriculum of The Odin Project's 
 [curriculum](https://www.theodinproject.com/dashboard).
